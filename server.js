@@ -8,6 +8,23 @@ const PORT = process.env.PORT || 5000
 
 dotenv.config()
 
+// app.use(cors());
+// const { createProxyMiddleware } = require('http-proxy-middleware');
+// app.use('/api', createProxyMiddleware({ 
+//     target: 'http://localhost:8080/', //original url
+//     changeOrigin: true, 
+//     //secure: false,
+//     onProxyRes: function (proxyRes, req, res) {
+//        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+//     }
+// }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+  });
+
+
 app.listen(PORT,()=>{
     console.log(`Listening to PORT ${PORT}`)
 })
